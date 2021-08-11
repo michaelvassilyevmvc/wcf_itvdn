@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Server
 {
@@ -12,12 +8,12 @@ namespace Server
         static void Main(string[] args)
         {
             Console.Title = "SERVER";
-            Uri uri = new Uri("http://localhost:4050/IContract");
+            Uri address = new Uri("http://localhost:4050/IContract");
             BasicHttpBinding binding = new BasicHttpBinding();
             Type contract = typeof(IContract);
 
-            ServiceHost host = new ServiceHost(contract, uri);
-            host.AddServiceEndpoint(contract, binding, uri);
+            ServiceHost host = new ServiceHost(typeof(Service));
+            host.AddServiceEndpoint(contract, binding, address);
             host.Open();
 
             Console.WriteLine("Ожидание сообщения от клиента");
